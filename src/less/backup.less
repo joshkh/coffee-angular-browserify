@@ -4,8 +4,6 @@
 */
 
 @l1-width: 50px;
-@import 'arrow.less';
-@import url(https://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic);
 
 #site-wrapper {
   position: relative;
@@ -76,74 +74,35 @@ body {
   box-shadow: inset 0 0 100px rgba(0,0,0,.5);
   background-color: #333;
   color: #fff;
-  background-color: white;
 }
 
 html,body{
   margin:0;
   padding:0;
-font-family: 'Lora', serif;
 }
 
-
-.prev-steps {
-  left: 0;
-}
-
-.next-steps {
+.nsteps-container {
+  position: fixed;
+  backgorund: black;
+  width: 100px;
+  height: 100%;
+  top: 0;
   right: 0;
-  transition: all .2s ease;
+  displah: flex;
+  flex-direction: column;
 }
 
-.top {
-  z-index: 999;
-}
 
-.steps-container {
+.flexbox{
   position:fixed;
-  background: #E1EAF2;
+  background:black;
   width:100px;
   height:100%;
   top: 0;
+  right: 0;
+
   display: flex;
   flex-direction:column;
-
-  .header {
-    background: #2c79be;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100px;
-    font-size: 1.5em;
-  }
-
-  .category {
-    border-bottom: 1px solid #C1D4E6;
-    flex-shrink: 0;
-    display: block;
-    min-height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-
-    .contents {
-      display: flex;
-      flex-direction: column;
-      color: #6B6B6B;
-
-      .ico {
-        text-align: center;
-      }
-
-      .text {
-        // display: flex;
-        text-align: center;
-      }
-    }
-  }
-
 }
 
 .flex{
@@ -166,8 +125,4 @@ font-family: 'Lora', serif;
 
 .flexbox-clipper {
   width: 10px;
-}
-
-.show-nav {
-  right: 200px;
 }

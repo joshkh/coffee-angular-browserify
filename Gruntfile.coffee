@@ -3,7 +3,7 @@ module.exports = ->
   @initConfig
 
     clean:
-      all: ["tmp", 'public/css/style.css']
+      all: ["tmp", 'public/**/*.html', "public/js/**", "public/css/**"]
 
     connect:
       all:
@@ -11,24 +11,44 @@ module.exports = ->
           port: 9000
           base: 'public'
 
+    copy:
+      main:
+        files: [
+          {expand: true,
+          cwd: 'src/html',
+          src: ['**'],
+          dest: 'public/'},
+          {expand: true,
+          cwd: 'tmp/js',
+          src: ['**'],
+          dest: 'public/js/'}
+        ]
+
     browserify:
       dist:
         files:
-          'public/js/controllers.js': ['tmp/js/**/*.js']
+          'public/js/bundle.js': ['tmp/js/**/*.js']
         options:
           standalone: 'app'
 
     watch:
       css:
         files: 'src/less/**'
-        tasks: ['clean', 'less']
+        tasks: ['clean', 'less', 'copy:main', 'coffee:all', 'browserify:dist']
       src:
         files: 'src/coffee/**'
-        tasks: ['clean', 'coffee:all', 'browserify:dist']
+        tasks: ['clean', 'less', 'copy:main', 'coffee:all', 'browserify:dist']
+      html:
+        files: 'src/html/**'
+        tasks: ['clean', 'less', 'copy:main', 'coffee:all', 'browserify:dist']
 
     mochaTest:
       test:
         src: ['test/**/*.coffee']
+
+    bower:
+      dev:
+        dest: 'dest/path'
 
     coffee:
       all:
@@ -49,6 +69,8 @@ module.exports = ->
   @loadNpmTasks "grunt-contrib-less"
   @loadNpmTasks "grunt-contrib-coffee"
   @loadNpmTasks "grunt-browserify"
+  @loadNpmTasks "grunt-contrib-copy"
+  @loadNpmTasks "grunt-bower"
 
 
 
